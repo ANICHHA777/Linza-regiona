@@ -1,0 +1,2770 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Линза региона — Дмитровский городской округ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700&family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-deep: #06080f;
+      --bg-elevated: #0a0e18;
+      --bg-section: #0c111c;
+      --accent: #6366f1;
+      --gold: #c8a84b;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --text: #ffffff;
+      --text-muted: rgba(255, 255, 255, 0.6);
+      --text-subtle: rgba(255, 255, 255, 0.35);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.15);
+      --card-bg: rgba(255, 255, 255, 0.03);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      font-size: clamp(15px, 1.05vw, 17px);
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--bg-deep);
+      overflow-x: hidden;
+    }
+
+    /* Фон: HQ-видео draftly-video.mp4 (копия draftly-video_1_190122.MP4 рядом с index.html) */
+    .bg-live {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      background: var(--bg-deep);
+    }
+
+    .bg-live__video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .bg-live__shade {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(
+        165deg,
+        rgba(6, 8, 15, 0.82) 0%,
+        rgba(6, 8, 15, 0.68) 45%,
+        rgba(6, 8, 15, 0.88) 100%
+      );
+    }
+
+    .page-shell {
+      position: relative;
+      z-index: 2;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1180px, 100% - 2rem);
+      margin-inline: auto;
+    }
+
+    /* Название «Линза региона»: шрифт + «стеклянная» оптика линзы */
+    .brand-lens {
+      display: inline-block;
+      font-family: "Outfit", "Inter", system-ui, sans-serif;
+      font-weight: 600;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+      background-image:
+        radial-gradient(ellipse 75% 140% at 32% 46%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 52%),
+        radial-gradient(ellipse 85% 120% at 78% 58%, rgba(199, 210, 254, 0.95) 0%, rgba(99, 102, 241, 0.35) 38%, transparent 58%),
+        radial-gradient(ellipse 50% 80% at 50% 100%, rgba(200, 168, 75, 0.22) 0%, transparent 55%),
+        linear-gradient(
+          118deg,
+          #a5b4fc 0%,
+          #eef2ff 22%,
+          #ffffff 38%,
+          #c4b5fd 54%,
+          #6366f1 72%,
+          #e0e7ff 100%
+        );
+      background-size: 200% 200%, 200% 200%, 180% 180%, 280% 280%;
+      background-position: 35% 45%, 70% 55%, 50% 100%, 0% 50%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 0 20px rgba(129, 140, 248, 0.4)) drop-shadow(0 3px 18px rgba(0, 0, 0, 0.45));
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .brand-lens--hero,
+      .brand-lens--modules,
+      .brand-lens--stake-lens,
+      .brand-lens--stake-tail,
+      .brand-lens--invest-lens,
+      .brand-lens--invest-tail {
+        animation: lensShimmer 14s ease-in-out infinite alternate;
+      }
+    }
+
+    @keyframes lensShimmer {
+      0% {
+        background-position: 30% 42%, 75% 58%, 48% 100%, 5% 48%;
+      }
+      50% {
+        background-position: 45% 52%, 62% 48%, 52% 95%, 50% 55%;
+      }
+      100% {
+        background-position: 38% 48%, 68% 52%, 50% 100%, 95% 42%;
+      }
+    }
+
+    .brand-lens--hero {
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      filter: drop-shadow(0 0 36px rgba(129, 140, 248, 0.5)) drop-shadow(0 6px 32px rgba(0, 0, 0, 0.5));
+    }
+
+    /* Герой: «Линза» впереди видео — перспектива и слой Z */
+    .hero-title-3d {
+      perspective: min(1400px, 120vw);
+      perspective-origin: 50% 45%;
+      font-size: clamp(3rem, 10vw, 6rem);
+      line-height: 1.05;
+      margin: 0 0 0.5rem;
+      font-weight: 700;
+    }
+
+    .hero-title-3d__inner {
+      display: inline-block;
+      transform-style: preserve-3d;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
+    }
+
+    .brand-lens--hero-lens {
+      display: inline-block;
+      transform: translateZ(0.22em) scale(1.045);
+      filter:
+        drop-shadow(0 4px 2px rgba(255, 255, 255, 0.22))
+        drop-shadow(0 0 50px rgba(129, 140, 248, 0.65))
+        drop-shadow(0 18px 56px rgba(0, 0, 0, 0.65))
+        drop-shadow(0 1px 0 rgba(99, 102, 241, 0.35));
+    }
+
+    .brand-lens--hero-region {
+      display: inline-block;
+      margin-left: 0.28em;
+      transform: translateZ(-0.1em) scale(0.94);
+      opacity: 0.88;
+      filter: drop-shadow(0 0 28px rgba(129, 140, 248, 0.4)) drop-shadow(0 10px 36px rgba(0, 0, 0, 0.55));
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-title-3d__inner--idle {
+        animation: heroLensBreath 10s ease-in-out infinite;
+      }
+    }
+
+    @keyframes heroLensBreath {
+      0%, 100% {
+        transform: rotateX(4deg) rotateY(-2deg) translateZ(0);
+      }
+      50% {
+        transform: rotateX(6deg) rotateY(2deg) translateZ(4px);
+      }
+    }
+
+    /* «Пять модулей. Один продукт.» — как герой: 3D + блеск градиента */
+    .modules-title-3d {
+      perspective: min(1100px, 100vw);
+      perspective-origin: 50% 45%;
+      font-size: clamp(2.15rem, 5.2vw, 3.35rem);
+      line-height: 1.1;
+      margin: 0;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: -0.035em;
+    }
+
+    .modules-title-3d__inner {
+      display: inline-block;
+      transform-style: preserve-3d;
+    }
+
+    .brand-lens--modules {
+      font-weight: 700;
+      letter-spacing: -0.04em;
+    }
+
+    .brand-lens--modules-lens {
+      display: inline-block;
+      transform: translateZ(0.16em) scale(1.04);
+      filter:
+        drop-shadow(0 3px 1px rgba(255, 255, 255, 0.2))
+        drop-shadow(0 0 40px rgba(129, 140, 248, 0.55))
+        drop-shadow(0 12px 40px rgba(0, 0, 0, 0.55))
+        drop-shadow(0 1px 0 rgba(99, 102, 241, 0.3));
+    }
+
+    .brand-lens--modules-tail {
+      display: inline-block;
+      transform: translateZ(-0.08em) scale(0.95);
+      opacity: 0.9;
+      filter: drop-shadow(0 0 24px rgba(129, 140, 248, 0.38)) drop-shadow(0 8px 28px rgba(0, 0, 0, 0.5));
+    }
+
+    .brand-lens--stake-lens {
+      display: inline-block;
+      transform: none;
+      filter:
+        drop-shadow(0 2px 1px rgba(255, 255, 255, 0.18))
+        drop-shadow(0 0 40px rgba(200, 168, 75, 0.38))
+        drop-shadow(0 0 34px rgba(129, 140, 248, 0.42))
+        drop-shadow(0 10px 36px rgba(0, 0, 0, 0.5))
+        drop-shadow(0 1px 0 rgba(200, 168, 75, 0.22));
+    }
+
+    .brand-lens--stake-tail {
+      display: inline-block;
+      transform: none;
+      opacity: 1;
+      filter:
+        drop-shadow(0 0 26px rgba(200, 168, 75, 0.36))
+        drop-shadow(0 0 20px rgba(129, 140, 248, 0.28))
+        drop-shadow(0 8px 26px rgba(0, 0, 0, 0.48));
+    }
+
+    .brand-lens--invest-lens {
+      display: inline-block;
+      transform: none;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      filter:
+        drop-shadow(0 2px 1px rgba(255, 255, 255, 0.2))
+        drop-shadow(0 0 42px rgba(52, 211, 153, 0.32))
+        drop-shadow(0 0 36px rgba(129, 140, 248, 0.45))
+        drop-shadow(0 10px 38px rgba(0, 0, 0, 0.52));
+    }
+
+    .brand-lens--invest-tail {
+      display: inline-block;
+      transform: none;
+      opacity: 0.96;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      filter:
+        drop-shadow(0 0 28px rgba(200, 168, 75, 0.45))
+        drop-shadow(0 0 22px rgba(99, 102, 241, 0.35))
+        drop-shadow(0 8px 28px rgba(0, 0, 0, 0.5));
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .modules-title-3d__inner--sparkle {
+        animation: modulesLensBreath 9s ease-in-out infinite;
+      }
+    }
+
+    @keyframes modulesLensBreath {
+      0%, 100% {
+        transform: rotateX(3deg) rotateY(-1.5deg) translateZ(0);
+      }
+      50% {
+        transform: rotateX(5deg) rotateY(1.5deg) translateZ(3px);
+      }
+    }
+
+    .stakeholders-wow {
+      text-align: center;
+      max-width: 46rem;
+      margin: 0 auto 1.75rem;
+    }
+
+    .stakeholders-wow__title {
+      font-size: clamp(2.15rem, 5.5vw, 3.45rem);
+      line-height: 1.18;
+      margin: 0 0 1.05rem;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: -0.035em;
+      font-family: "Outfit", "Inter", system-ui, sans-serif;
+    }
+
+    .stakeholders-wow__title-inner {
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: baseline;
+      gap: 0.22em 0.32em;
+      white-space: nowrap;
+    }
+
+    .stakeholders-wow__sub {
+      font-family: "Cormorant Garamond", "Times New Roman", Georgia, serif;
+      font-size: clamp(1.25rem, 2.6vw, 1.65rem);
+      font-weight: 500;
+      line-height: 1.45;
+      color: var(--text-muted);
+      max-width: 38rem;
+      margin: 0 auto 2rem;
+      letter-spacing: 0.035em;
+    }
+
+    .stakeholders-wow__num {
+      font-variant-numeric: lining-nums;
+      font-weight: 700;
+      font-size: 1.12em;
+      background: linear-gradient(135deg, #fde68a 0%, var(--gold) 45%, #c4b5fd 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 0 14px rgba(200, 168, 75, 0.45));
+    }
+
+    .stakeholders-wow__accent {
+      display: block;
+      margin-top: 0.45rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      text-shadow:
+        0 0 48px rgba(99, 102, 241, 0.18),
+        0 0 28px rgba(200, 168, 75, 0.12);
+    }
+
+    /* Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Sections */
+    .section {
+      padding: clamp(3.5rem, 8vw, 6rem) 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .section--hero {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      border-bottom: none;
+      padding: 6rem 0 4rem;
+    }
+
+    .section--deep {
+      background: rgba(6, 8, 15, 0.9);
+    }
+
+    .section--lift {
+      background: rgba(12, 17, 28, 0.9);
+    }
+
+    .section--hero.section--deep {
+      background: linear-gradient(
+        180deg,
+        rgba(6, 8, 15, 0.45) 0%,
+        rgba(6, 8, 15, 0.58) 100%
+      );
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 500;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--text);
+    }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 52ch;
+      margin: 0 0 2rem;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+      margin-bottom: 1rem;
+      padding: 0.35rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .tag--accent {
+      color: var(--accent);
+      border-color: rgba(99, 102, 241, 0.35);
+    }
+
+    .tag--gold {
+      color: var(--gold);
+      border-color: rgba(200, 168, 75, 0.35);
+    }
+
+    .tag--module {
+      display: inline-block;
+      font-family: "Outfit", "Inter", system-ui, sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      padding: 0.45rem 1.05rem;
+      border-width: 1.5px;
+      text-transform: uppercase;
+      box-shadow:
+        0 0 32px rgba(99, 102, 241, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.14);
+      background: linear-gradient(
+        155deg,
+        rgba(99, 102, 241, 0.26) 0%,
+        rgba(15, 23, 42, 0.68) 48%,
+        rgba(129, 140, 248, 0.14) 100%
+      );
+    }
+
+    .tag--module.tag--accent {
+      color: #e0e7ff;
+      border-color: rgba(165, 180, 252, 0.65);
+      text-shadow: 0 0 22px rgba(129, 140, 248, 0.5);
+    }
+
+    .tag--module.tag--gold {
+      color: #fef3c7;
+      border-color: rgba(251, 191, 36, 0.55);
+      text-shadow: 0 0 24px rgba(200, 168, 75, 0.45);
+      box-shadow:
+        0 0 38px rgba(200, 168, 75, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      background: linear-gradient(
+        155deg,
+        rgba(200, 168, 75, 0.26) 0%,
+        rgba(15, 23, 42, 0.62) 45%,
+        rgba(99, 102, 241, 0.12) 100%
+      );
+    }
+
+    .inline-module {
+      font-family: "Outfit", "Inter", system-ui, sans-serif;
+      font-weight: 800;
+      font-size: 0.88em;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #c7d2fe;
+      text-shadow: 0 0 14px rgba(129, 140, 248, 0.45);
+    }
+
+    .inline-module--gold {
+      color: #fde68a;
+      text-shadow: 0 0 14px rgba(200, 168, 75, 0.4);
+    }
+
+    .inline-module--prose {
+      text-transform: none;
+      font-size: 1.02em;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+
+    /* Hero */
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .hero__grid {
+      position: absolute;
+      inset: -50%;
+      width: 200%;
+      height: 200%;
+      background-image:
+        radial-gradient(circle at center, rgba(99, 102, 241, 0.12) 1px, transparent 1px);
+      background-size: 32px 32px;
+      animation: gridDrift 80s linear infinite;
+      opacity: 0.45;
+    }
+
+    @keyframes gridDrift {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(-32px, -32px) rotate(0.5deg); }
+    }
+
+    .hero__content {
+      position: relative;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .hero__lead {
+      font-size: clamp(1.15rem, 2.5vw, 1.4rem);
+      color: var(--text-muted);
+      margin: 0 0 1.25rem;
+      font-weight: 400;
+    }
+
+    .hero__desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 38rem;
+      margin: 0 auto;
+    }
+
+    .mockups-section {
+      padding-top: clamp(2.5rem, 6vw, 4rem);
+    }
+
+    .mockups-section .section-title {
+      font-family: "Cormorant Garamond", "Times New Roman", Georgia, serif;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      font-size: clamp(1.75rem, 3.2vw, 2.35rem);
+      line-height: 1.22;
+      margin-bottom: 0.5rem;
+    }
+
+    .mockups-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.35rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .mockups-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .mockup-card {
+      margin: 0;
+      padding: 1.15rem;
+      border-radius: 20px;
+      border: 0.5px solid var(--border);
+      background: var(--card-bg);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .mockup-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+
+    .mockup-card img {
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto;
+      height: auto;
+      display: block;
+      border-radius: 14px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Видео-макеты: компактнее по ширине, соотношение как у телефона */
+    .mockup-video-wrap {
+      position: relative;
+      width: 100%;
+      max-width: clamp(200px, 22vw, 248px);
+      margin: 0 auto;
+      aspect-ratio: 390 / 844;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.32);
+      background: var(--bg-elevated);
+    }
+
+    .mockup-video-wrap video {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      object-fit: cover;
+      transform: translate(-50%, -50%) scale(1.16);
+      pointer-events: none;
+    }
+
+    .mockup-video-wrap--crop-a video {
+      object-position: 50% 34%;
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+
+    .mockup-video-wrap--crop-b video {
+      object-position: 50% 40%;
+      transform: translate(-50%, -50%) scale(1.18);
+    }
+
+    .mockup-card .mockup-frame {
+      display: flex;
+      justify-content: center;
+    }
+
+    .mockups-section .mockup-card figcaption {
+      margin-top: 0.85rem;
+      font-family: "Inter", system-ui, sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      line-height: 1.6;
+      letter-spacing: 0.018em;
+      max-width: 26rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .mockups-section .mockup-title {
+      font-family: "Cormorant Garamond", "Times New Roman", Georgia, serif;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      font-variant-numeric: lining-nums;
+    }
+
+    /* Cards */
+    .card {
+      padding: 1.35rem;
+      min-height: auto;
+      border-radius: 18px;
+      border: 0.5px solid var(--border);
+      background: var(--card-bg);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .badge--success { background: rgba(34, 197, 94, 0.2); color: var(--success); }
+    .badge--warning { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
+    .badge--danger { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
+    .badge--muted { background: rgba(255, 255, 255, 0.08); color: var(--text-muted); }
+    .badge--accent { background: rgba(99, 102, 241, 0.2); color: var(--accent); }
+    .badge--gold { background: rgba(200, 168, 75, 0.2); color: var(--gold); }
+
+    /* Секция «Агент-Разведчик» + встроенный дашборд на всю ширину */
+    .scout-section {
+      scroll-margin-top: 6rem;
+    }
+
+    .scout-section__head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .scout-section__lead {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 48rem;
+      margin: 0 0 1rem;
+      line-height: 1.6;
+    }
+
+    .scout-theses {
+      margin-bottom: 0.25rem;
+    }
+
+    .scout-dashboard-wrap {
+      width: 100%;
+      margin-top: 1.15rem;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 0.5px solid rgba(99, 102, 241, 0.4);
+      background: rgba(0, 0, 0, 0.55);
+      height: min(72vh, 780px);
+      min-height: 420px;
+      box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.35),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+    }
+
+    .scout-dashboard-iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    @media (max-width: 600px) {
+      .principles {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .coop {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .coop {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Секция «О проекте»: доверие, прозрачность, необходимость партнёрства */
+    .philosophy-section {
+      position: relative;
+      border-top: 1px solid rgba(200, 168, 75, 0.22);
+      background: linear-gradient(
+        180deg,
+        rgba(200, 168, 75, 0.065) 0%,
+        rgba(12, 17, 28, 0.2) 38%,
+        transparent 100%
+      );
+    }
+
+    .phil-hero {
+      text-align: center;
+      max-width: 46rem;
+      margin: 0 auto 1.5rem;
+    }
+
+    .phil-hero .section-title {
+      margin-bottom: 0;
+    }
+
+    .phil-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1.15rem;
+    }
+
+    .card--trust-boost {
+      border-color: rgba(200, 168, 75, 0.28);
+      background: rgba(200, 168, 75, 0.04);
+    }
+
+    .card h3 {
+      font-size: 1.05rem;
+      font-weight: 500;
+      margin: 0 0 0.5rem;
+    }
+
+    .card p,
+    .card li {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .card ul {
+      margin: 0.5rem 0 0;
+      padding-left: 1.1rem;
+    }
+
+    /* Blocks grid */
+    .blocks-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+
+    @media (max-width: 600px) {
+      .blocks-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .block-card--full {
+      grid-column: 1 / -1;
+    }
+
+    .block-card__concept {
+      margin: 0 0 1rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+
+    .block-card__concept strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .block-card__section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 1.1rem 0 0.55rem;
+    }
+
+    .block-card .theses-strong li strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* MiroFish — премиальный showcase */
+    .mirofish-showcase {
+      grid-column: 1 / -1;
+      position: relative;
+      border-radius: 26px;
+      padding: 0;
+      margin: 0;
+      background: transparent;
+      box-shadow: none;
+      border: none;
+    }
+
+    .mirofish-showcase::before {
+      content: "";
+      position: absolute;
+      inset: -3px;
+      border-radius: 28px;
+      z-index: 0;
+      background: linear-gradient(
+        125deg,
+        #6366f1,
+        #8b5cf6,
+        #d946ef,
+        #ec4899,
+        #c8a84b,
+        #6366f1
+      );
+      background-size: 400% 400%;
+      opacity: 0.92;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .mirofish-showcase::before {
+        animation: mirofishBorderFlow 16s ease infinite;
+      }
+
+      .mirofish-showcase__inner::after {
+        animation: mirofishGridDrift 22s linear infinite;
+      }
+    }
+
+    @keyframes mirofishBorderFlow {
+      0%, 100% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .mirofish-showcase::after {
+      content: "";
+      position: absolute;
+      inset: -12px;
+      border-radius: 32px;
+      z-index: -1;
+      opacity: 0.55;
+      filter: blur(28px);
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.55), rgba(236, 72, 153, 0.4), rgba(200, 168, 75, 0.35));
+      pointer-events: none;
+    }
+
+    .mirofish-showcase__inner {
+      position: relative;
+      z-index: 1;
+      margin: 3px;
+      border-radius: 23px;
+      padding: clamp(1.35rem, 4vw, 2.35rem);
+      background: linear-gradient(
+        168deg,
+        rgba(10, 14, 24, 0.99) 0%,
+        rgba(8, 10, 18, 0.98) 45%,
+        rgba(18, 12, 28, 0.97) 100%
+      );
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      overflow: hidden;
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+        0 24px 80px rgba(0, 0, 0, 0.45);
+    }
+
+    .mirofish-showcase__inner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 90% 70% at 10% -10%, rgba(99, 102, 241, 0.22), transparent 55%),
+        radial-gradient(ellipse 70% 60% at 95% 100%, rgba(236, 72, 153, 0.16), transparent 45%);
+      z-index: 0;
+    }
+
+    .mirofish-showcase__inner::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.35;
+      background-image: radial-gradient(rgba(199, 210, 254, 0.09) 1px, transparent 1px);
+      background-size: 28px 28px;
+      z-index: 0;
+    }
+
+    @keyframes mirofishGridDrift {
+      0% {
+        transform: translate(0, 0);
+      }
+      100% {
+        transform: translate(-28px, -28px);
+      }
+    }
+
+    .mirofish-showcase .block-card__head {
+      position: relative;
+      z-index: 2;
+      margin-bottom: 0.5rem;
+    }
+
+    .mirofish-hero-title {
+      position: relative;
+      z-index: 2;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(1.9rem, 4.5vw, 2.85rem);
+      font-weight: 700;
+      line-height: 1.14;
+      letter-spacing: -0.02em;
+      margin: 0.35rem 0 1rem;
+      background: linear-gradient(
+        105deg,
+        #ffffff 0%,
+        #e0e7ff 18%,
+        #f5d0fe 42%,
+        #fda4af 58%,
+        #fde68a 78%,
+        #ffffff 100%
+      );
+      background-size: 220% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 0 36px rgba(167, 139, 250, 0.35));
+    }
+
+    .mirofish-hero-title--lead {
+      margin-top: 0.15rem;
+      margin-bottom: 0.55rem;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .mirofish-hero-title {
+        animation: mirofishTitleShine 12s ease-in-out infinite;
+      }
+    }
+
+    @keyframes mirofishTitleShine {
+      0%, 100% {
+        background-position: 0% center;
+      }
+      50% {
+        background-position: 100% center;
+      }
+    }
+
+    .mirofish-kicker {
+      position: relative;
+      z-index: 2;
+      font-size: 0.97rem;
+      line-height: 1.68;
+      color: var(--text-muted);
+      max-width: 54rem;
+      margin: 0.5rem 0 0.65rem;
+    }
+
+    .mirofish-kicker strong {
+      color: rgba(255, 255, 255, 0.95);
+      font-weight: 600;
+    }
+
+    .mirofish-lede {
+      position: relative;
+      z-index: 2;
+      margin: 0 0 0.25rem;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: rgba(199, 210, 254, 0.85);
+    }
+
+    .mirofish-body {
+      position: relative;
+      z-index: 2;
+      margin: 0.85rem 0 0;
+      font-size: 0.95rem;
+      line-height: 1.68;
+      color: var(--text-muted);
+      max-width: 54rem;
+    }
+
+    .mirofish-body strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .mirofish-pillars {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 1.65rem 0 0.25rem;
+    }
+
+    @media (max-width: 900px) {
+      .mirofish-pillars {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .mirofish-pillar {
+      padding: 1.2rem 1.15rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.035);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .mirofish-pillar:hover {
+        transform: translateY(-5px);
+        border-color: rgba(139, 92, 246, 0.5);
+        box-shadow:
+          0 20px 50px rgba(0, 0, 0, 0.4),
+          0 0 50px rgba(99, 102, 241, 0.18);
+      }
+    }
+
+    .mirofish-pillar__eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.45rem;
+    }
+
+    .mirofish-pillar h4 {
+      margin: 0 0 0.55rem;
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.28;
+    }
+
+    .mirofish-pillar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .mirofish-pillar li {
+      position: relative;
+      padding-left: 1.05rem;
+      margin-bottom: 0.55rem;
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+
+    .mirofish-pillar li:last-child {
+      margin-bottom: 0;
+    }
+
+    .mirofish-pillar li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.52em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #ec4899);
+      box-shadow: 0 0 12px rgba(236, 72, 153, 0.55);
+    }
+
+    .mirofish-pillar li strong {
+      color: rgba(255, 255, 255, 0.92);
+      font-weight: 500;
+    }
+
+    .mirofish-verdict {
+      position: relative;
+      z-index: 2;
+      margin: 1.65rem 0 0;
+      padding: 1.3rem 1.4rem;
+      border-radius: 16px;
+      border: 1px solid rgba(200, 168, 75, 0.5);
+      background: linear-gradient(
+        135deg,
+        rgba(200, 168, 75, 0.14),
+        rgba(99, 102, 241, 0.1),
+        rgba(236, 72, 153, 0.08)
+      );
+      box-shadow:
+        0 0 60px rgba(200, 168, 75, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+
+    .mirofish-verdict__label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .mirofish-verdict p {
+      margin: 0;
+      font-size: 0.98rem;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .mirofish-verdict strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .block-card__head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .block-card__icon {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .block-card h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin: 0 0 0.35rem;
+    }
+
+    .theses {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+
+    .theses li {
+      position: relative;
+      padding-left: 1rem;
+      margin-bottom: 0.65rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .theses li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .block-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .block-metrics span {
+      font-size: 0.8rem;
+      color: var(--text-subtle);
+      padding: 0.25rem 0.5rem;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    /* Radar section */
+    .radar-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .radar-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .tu-list {
+      list-style: none;
+      padding: 0;
+      margin: 1.25rem 0;
+    }
+
+    .tu-item {
+      display: grid;
+      grid-template-columns: 1fr auto 80px;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    @media (max-width: 600px) {
+      .tu-item {
+        grid-template-columns: 1fr auto;
+      }
+      .tu-item .tu-bar-wrap {
+        grid-column: 1 / -1;
+      }
+    }
+
+    .tu-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .tu-dot--red { background: var(--danger); box-shadow: 0 0 12px rgba(239, 68, 68, 0.4); }
+    .tu-dot--yellow { background: var(--warning); }
+    .tu-dot--green { background: var(--success); }
+
+    .tu-bar-wrap {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .tu-bar {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 1s ease;
+    }
+
+    .compare-box {
+      margin-top: 1.5rem;
+      padding: 1.25rem;
+      border-radius: 16px;
+      border: 0.5px solid var(--border);
+      background: var(--card-bg);
+    }
+
+    .compare-box p {
+      margin: 0 0 0.75rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .compare-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .chip {
+      padding: 0.35rem 0.6rem;
+      border-radius: 10px;
+      font-size: 0.8125rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 0.5px solid var(--border);
+    }
+
+    .chip--warn { border-color: rgba(245, 158, 11, 0.35); color: var(--warning); }
+
+    /* SVG Radar */
+    .radar-svg-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .radar-svg {
+      width: min(100%, 380px);
+      height: auto;
+      aspect-ratio: 1;
+    }
+
+    .radar-ring {
+      fill: none;
+      stroke: rgba(99, 102, 241, 0.15);
+      stroke-width: 1;
+    }
+
+    .radar-axis {
+      stroke: rgba(255, 255, 255, 0.08);
+      stroke-width: 0.75;
+    }
+
+    .radar-sweep {
+      transform-origin: 200px 200px;
+      animation: radarSweep 4s linear infinite;
+    }
+
+    @keyframes radarSweep {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .radar-center {
+      fill: var(--accent);
+    }
+
+    .radar-dot {
+      filter: drop-shadow(0 0 4px currentColor);
+    }
+
+    .radar-label {
+      fill: var(--text-subtle);
+      font-size: 11px;
+      font-family: "Inter", sans-serif;
+    }
+
+    /* KPI grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .kpi-card .kpi-val {
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+
+    .kpi-card .kpi-lab {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Table */
+    .table-wrap {
+      overflow: hidden;
+      border-radius: 16px;
+      border: 0.5px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      table-layout: fixed;
+    }
+
+    @media (min-width: 700px) {
+      table {
+        font-size: 0.9rem;
+      }
+    }
+
+    th,
+    td {
+      padding: 0.85rem 0.65rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      word-wrap: break-word;
+    }
+
+    @media (min-width: 700px) {
+      th,
+      td {
+        padding: 0.85rem 1rem;
+      }
+    }
+
+    th {
+      font-weight: 500;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    tr:nth-child(even) td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .cell-bad { color: var(--danger); }
+    .cell-good { color: var(--success); }
+
+    /* Stakeholders */
+    .stake-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    @media (max-width: 1000px) {
+      .stake-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .stake-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .stake-card .stake-icon {
+      font-size: 1.35rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .stake-card .role {
+      font-weight: 500;
+      margin: 0 0 0.35rem;
+      font-size: 1rem;
+    }
+
+    .stake-card .gets {
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    /* Аналоги: мировые практики */
+    .analogs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .analogs-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .analog-card__city {
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+
+    .analog-card p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    .analogs-callout {
+      margin-top: 1.35rem;
+      padding: 1.25rem 1.35rem;
+      border-radius: 16px;
+      border: 0.5px solid rgba(200, 168, 75, 0.4);
+      background: rgba(200, 168, 75, 0.07);
+    }
+
+    .analogs-callout p {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+    }
+
+    .analogs-callout strong {
+      font-weight: 500;
+      color: var(--gold);
+    }
+
+    /* Персональные AI-агенты (Модуль II) */
+    .personal-agents-section,
+    .module-ii-section {
+      scroll-margin-top: 6rem;
+    }
+
+    .module-ii__intro {
+      text-align: center;
+      max-width: 52rem;
+      margin-inline: auto;
+    }
+
+    .module-ii__intro .block-card__head {
+      justify-content: center;
+    }
+
+    .module-ii__intro .section-title {
+      margin-inline: auto;
+    }
+
+    .module-ii__intro .section-title--kpi {
+      margin-bottom: 0.35rem;
+    }
+
+    .module-ii__agents-title {
+      font-family: "Cormorant Garamond", "Times New Roman", Georgia, serif;
+      font-weight: 600;
+      letter-spacing: 0.035em;
+      font-size: clamp(1.65rem, 3.25vw, 2.35rem);
+      line-height: 1.22;
+      color: var(--text);
+      margin: clamp(1.1rem, 2.5vw, 1.65rem) auto 0.85rem;
+      max-width: 40rem;
+    }
+
+    .module-ii__intro .module-ii__lead {
+      margin-inline: auto;
+      max-width: 48rem;
+      margin-bottom: 0;
+    }
+
+    .personal-agents-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.15rem;
+      margin-top: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .personal-agents-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .thesis-card .thesis-num {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .thesis-card h3 {
+      font-size: 1.05rem;
+      font-weight: 500;
+      margin: 0 0 0.65rem;
+      line-height: 1.35;
+    }
+
+    .thesis-card p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 1.75rem;
+      margin: 0;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 1.75rem;
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -1.75rem;
+      top: 0.35rem;
+      width: 15px;
+      height: 15px;
+      margin-left: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid var(--bg-section);
+      z-index: 1;
+    }
+
+    .timeline-item--active::before {
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.25);
+    }
+
+    .timeline-item h4 {
+      margin: 0 0 0.35rem;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .timeline-item p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .timeline-item .res {
+      margin-top: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--gold);
+    }
+
+    /* Investments */
+    .investments-headline {
+      text-align: center;
+      margin: 0 auto 2rem;
+      max-width: 42rem;
+    }
+
+    .investments-headline .investments-headline__title {
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .investments-headline__inner {
+      display: inline-flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: baseline;
+      gap: 0.28em;
+      font-family: "Outfit", "Inter", system-ui, sans-serif;
+      font-size: clamp(2.2rem, 5.8vw, 3.6rem);
+      line-height: 1.08;
+      letter-spacing: -0.038em;
+      white-space: nowrap;
+    }
+
+    .investments-headline__sum {
+      margin: 0.5rem 0 0;
+      font-size: clamp(1.65rem, 4.2vw, 2.65rem);
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      color: var(--text);
+      letter-spacing: 0.03em;
+      line-height: 1.2;
+    }
+
+    @media (max-width: 420px) {
+      .stakeholders-wow__title-inner,
+      .investments-headline__inner {
+        white-space: normal;
+        justify-content: center;
+      }
+
+      .investments-headline__inner {
+        flex-wrap: wrap;
+      }
+    }
+
+    .budget-bar {
+      display: flex;
+      height: 14px;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 1.5rem 0;
+      border: 0.5px solid var(--border);
+    }
+
+    .budget-seg { height: 100%; }
+    .seg-a { width: 5%; background: #3b82f6; }
+    .seg-b { width: 18.33%; background: var(--success); }
+    .seg-c { width: 15%; background: var(--warning); }
+    .seg-d { width: 11.67%; background: #06b6d4; }
+    .seg-e { width: 20%; background: #a855f7; }
+    .seg-f { width: 30%; background: #ec4899; }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .legend i {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .expense-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 2rem;
+    }
+
+    .expense-list li {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .expense-list__label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      flex: 1 1 12rem;
+      min-width: 0;
+    }
+
+    .expense-list__module {
+      font-family: "Outfit", "Inter", system-ui, sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #e0e7ff;
+      background: rgba(99, 102, 241, 0.22);
+      border: 1px solid rgba(165, 180, 252, 0.55);
+      padding: 0.28rem 0.55rem;
+      border-radius: 8px;
+      flex-shrink: 0;
+      box-shadow:
+        0 0 20px rgba(99, 102, 241, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .expense-list__module--gold {
+      color: #fef3c7;
+      background: rgba(200, 168, 75, 0.2);
+      border-color: rgba(251, 191, 36, 0.45);
+      box-shadow:
+        0 0 22px rgba(200, 168, 75, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .expense-list b,
+    .expense-list__name {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .expense-list .amt {
+      margin-left: auto;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    @media (max-width: 600px) {
+      .expense-list .amt {
+        margin-left: 0;
+      }
+    }
+
+    .triple-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    @media (max-width: 600px) {
+      .triple-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .triple-cards .card {
+      text-align: center;
+    }
+
+    .triple-cards .num {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    .effect-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .effect-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* CTA */
+    .cta-section {
+      text-align: center;
+      padding: clamp(4rem, 10vw, 6rem) 0;
+    }
+
+    .cta-section__title {
+      font-size: clamp(1.85rem, 4vw, 2.65rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin: 0;
+      color: var(--text);
+    }
+
+    /* Pulse for radar dots (CSS on foreignObject or use class in SVG - we'll use animated circles) */
+    .pulse-dot {
+      animation: pulse 2s ease-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.55; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-live" id="ambient-video" aria-hidden="true">
+    <video
+      id="bg-video"
+      class="bg-live__video"
+      src="draftly-video.mp4"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+    ></video>
+  </div>
+  <div class="bg-live__shade" aria-hidden="true"></div>
+
+  <div class="page-shell">
+  <main>
+    <!-- 1 HERO -->
+    <section id="hero" class="section section--hero section--deep">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__grid"></div>
+      </div>
+      <div class="hero__content reveal">
+        <span class="tag">Дмитровский городской округ · 2026</span>
+        <h1 class="hero-title-3d">
+          <span class="hero-title-3d__inner hero-title-3d__inner--idle" id="hero-title-tilt">
+            <span class="brand-lens brand-lens--hero brand-lens--hero-lens">Линза</span><span class="brand-lens brand-lens--hero brand-lens--hero-region">региона</span>
+          </span>
+        </h1>
+        <p class="hero__lead">
+          Мобильное приложение с полной AI-инфраструктурой управления округом.
+        </p>
+        <p class="hero__desc">
+          Пять модулей — от перехвата сигналов до цифрового двойника территории.
+        </p>
+      </div>
+    </section>
+
+    <!-- MOCKUPS -->
+    <section id="mockups" class="section section--lift mockups-section">
+      <div class="container">
+        <div class="reveal">
+          <h2 class="section-title">Интерфейс мобильного приложения</h2>
+        </div>
+        <div class="mockups-grid" style="margin-top: 1.25rem;">
+          <figure class="mockup-card reveal">
+            <div class="mockup-frame">
+              <div class="mockup-video-wrap mockup-video-wrap--crop-a">
+                <video
+                  aria-label="Интерфейс: дашборд и сигналы, анимация выхода в кадр"
+                  src="mockup-interface-1.mp4"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                ></video>
+              </div>
+            </div>
+            <figcaption>
+              <div class="mockup-title">Дашборд и сигналы</div>
+              Тепловая карта, оповещения по зонам и каналы Telegram / ВК — логика модуля «Агент-Разведчик»: видеть риски до эскалации.
+            </figcaption>
+          </figure>
+          <figure class="mockup-card reveal">
+            <div class="mockup-frame">
+              <div class="mockup-video-wrap mockup-video-wrap--crop-b">
+                <video
+                  aria-label="Интерфейс приложения: анимированные иконки и навигация"
+                  src="mockup-interface-2.mp4"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                ></video>
+              </div>
+            </div>
+            <figcaption>
+              <div class="mockup-title">Пять направлений в одном приложении</div>
+              Наблюдение, KPI, медиа, советник и симуляция в боковом меню — однозначное соответствие пяти модулям экосистемы «Линза региона».
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="five-modules" class="section section--lift">
+      <div class="container">
+        <div class="reveal">
+          <h2 class="modules-title-3d">
+            <span class="modules-title-3d__inner modules-title-3d__inner--sparkle">
+              <span class="brand-lens brand-lens--modules brand-lens--modules-lens">Пять модулей.</span><span class="brand-lens brand-lens--modules brand-lens--modules-tail"> Один продукт.</span>
+            </span>
+          </h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- АГЕНТ-РАЗВЕДЧИК: отдельная секция, дашборд сразу под описанием -->
+    <section id="agent-scout" class="section section--deep scout-section">
+      <div class="container">
+        <div class="reveal">
+          <span class="tag tag--accent tag--module" style="margin-bottom: 0.75rem;">Модуль I</span>
+          <div class="scout-section__head">
+            <span class="block-card__icon" aria-hidden="true">🔍</span>
+            <span class="badge badge--warning">Beta запущена</span>
+          </div>
+          <h2 class="section-title">Агент-Разведчик</h2>
+          <p class="scout-section__lead">
+            Круглосуточный мониторинг 100+ открытых источников. Перехват сигналов за 5–14 дней до официальной жалобы.
+          </p>
+          <ul class="theses scout-theses">
+            <li>Парсинг Telegram-чатов всех ТУ, ВКонтакте, сайта и портала обратной связи — AI-классификатор определяет суть, адрес и приоритет за минуты.</li>
+            <li>Живая тепловая карта округа с SLA-таймером на каждый инцидент и автоэскалацией при просрочке.</li>
+            <li>Цифровой индекс доверия для каждой УК (0–100) на основе реальных обращений — объективная база для предписаний.</li>
+          </ul>
+          <div class="block-metrics" style="margin-top: 1rem; margin-bottom: 0.5rem; border-top: none; padding-top: 0;">
+            <span>−40% эскалаций</span>
+            <span>89 дн. окупаемость</span>
+          </div>
+          <p class="scout-section__lead" style="margin-top: 1rem; margin-bottom: 0.75rem; font-size: 0.95rem;">
+            Действующий пилот <strong style="font-weight: 500; color: rgba(255, 255, 255, 0.92);">Командного центра</strong> — во встроенной рамке ниже.
+          </p>
+          <div class="scout-dashboard-wrap">
+            <iframe
+              class="scout-dashboard-iframe"
+              src="https://agent-scout-hq.pages.dev"
+              title="Командный центр — пилот Агент-Разведчик"
+              allow="fullscreen; clipboard-write"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Модуль II: KPI + персональные агенты (единый блок сразу после Агента-Разведчика) -->
+    <section id="module-ii" class="section section--lift module-ii-section personal-agents-section">
+      <div class="container">
+        <div class="reveal module-ii__intro">
+          <span class="tag tag--accent tag--module" style="display: inline-block; margin-bottom: 0.65rem;">Модуль II</span>
+          <div class="block-card__head">
+            <span class="block-card__icon" aria-hidden="true">📈</span>
+            <span class="badge badge--muted">Следующий</span>
+          </div>
+          <h2 class="section-title section-title--kpi">KPI команды округа</h2>
+          <h3 class="module-ii__agents-title">Персональный AI-агент для каждого направления</h3>
+          <p class="section-sub module-ii__lead">
+            Каждый сотрудник администрации получает собственного AI-агента — обученного на графе знаний своего направления, оснащённого набором скилов и готовых промтов. Команда не заменяется — она усиливается. Каждый становится продуктивнее, оперативнее и точнее в своей зоне ответственности.
+          </p>
+        </div>
+        <div class="personal-agents-grid">
+          <article class="card thesis-card reveal">
+            <span class="thesis-num">Тезис 01</span>
+            <h3>Граф знаний под каждое направление</h3>
+            <p>
+              Каждый агент обучен на специфике своей роли: нормативная база, регламенты, история решений, типичные сценарии. Глава ЖКХ получает агента, который знает все УК, адреса, историю жалоб и законодательство. Начальник пресс-службы — агента с медиабазой, стилем коммуникации округа и шаблонами ответов.
+            </p>
+          </article>
+          <article class="card thesis-card reveal">
+            <span class="thesis-num">Тезис 02</span>
+            <h3>Готовые скилы и промты — не надо учиться</h3>
+            <p>
+              Каждый агент поставляется с библиотекой готовых команд под конкретные рабочие задачи. Сотруднику не нужно разбираться в AI — он просто нажимает нужный скил. Подготовить отчёт, сформулировать ответ жителю, проверить нормативное соответствие, составить предписание УК — всё это за секунды.
+            </p>
+          </article>
+          <article class="card thesis-card reveal">
+            <span class="thesis-num">Тезис 03</span>
+            <h3>Разгрузка рутины — фокус на стратегии</h3>
+            <p>
+              Агент забирает то, что отнимает время, но не требует решения: сбор данных, форматирование документов, первичная обработка обращений, подготовка справок. Сотрудник принимает решение — агент выполняет всё остальное. Производительность команды растёт без увеличения штата.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 BLOCKS: модули III–V -->
+    <section id="blocks" class="section section--deep">
+      <div class="container">
+        <div class="blocks-grid">
+          <article class="card block-card block-card--full reveal">
+            <span class="tag tag--accent tag--module" style="display: inline-block; margin-bottom: 0.65rem;">Модуль III</span>
+            <div class="block-card__head">
+              <span class="block-card__icon" aria-hidden="true">📡</span>
+              <span class="badge badge--muted">Планируется</span>
+            </div>
+            <h3>Медиа-Щит</h3>
+            <p class="block-card__concept">
+              <strong>Концепция: эффект «всевидящего ока» и предиктивный PR.</strong>
+              Система переводит работу пресс-службы из режима «тушения пожаров» в режим проактивного управления повесткой. Это ваша карманная «фабрика смыслов», которая нейтрализует негатив до того, как он выйдет на областной уровень.
+            </p>
+            <p class="block-card__section-label">Ключевые возможности</p>
+            <ul class="theses theses-strong">
+              <li><strong>Микро-мониторинг и перехват:</strong> непрерывный анализ не только крупных СМИ, но и локальных сообществ («ВКонтакте», Telegram-каналы, открытые домовые чаты). Система выявляет очаги недовольства на ранней стадии — до того, как жители массово напишут жалобы на портал «Добродел».</li>
+              <li><strong>ИИ-копирайтер в инфостиле Администрации:</strong> автоматическая генерация проектов ответов для соцсетей, пресс-релизов и разъяснительных постов. Нейросеть учитывает официальный тон (ToV) и юридические нюансы, экономя десятки часов работы сотрудников пресс-службы.</li>
+              <li><strong>Антикризисный контур (борьба с фейками):</strong> при вбросе дезинформации система мгновенно сигнализирует об аномальном росте негатива и предлагает готовый сценарий опровержения с фактурой.</li>
+            </ul>
+            <p class="block-card__section-label">Оцифрованный результат</p>
+            <ul class="theses theses-strong">
+              <li><strong>&lt; 30 минут</strong> — время реакции на информационные вбросы и фейки.</li>
+              <li><strong>Снижение до 30%</strong> количества эскалированных жалоб на порталы областного Правительства (за счёт гашения на местах).</li>
+              <li><strong>Экономия до 40 часов в неделю</strong> ресурсов пресс-службы и профильных замов на составление ответов.</li>
+            </ul>
+          </article>
+
+          <article class="card block-card block-card--full reveal">
+            <span class="tag tag--accent tag--module" style="display: inline-block; margin-bottom: 0.65rem;">Модуль IV</span>
+            <div class="block-card__head">
+              <span class="block-card__icon" aria-hidden="true">🧠</span>
+              <span class="badge badge--muted">Планируется</span>
+            </div>
+            <h3>Советник Главы</h3>
+            <p class="block-card__concept">
+              <strong>Концепция: ваш личный цифровой Think Tank (мозговой центр), который не спит.</strong>
+              <span class="inline-module inline-module--prose">Модуль</span> собирает объективную управленческую картину мира, освобождая Главу от искажений, которые могут возникать при передаче информации по цепочке подчинённых.
+            </p>
+            <p class="block-card__section-label">Ключевые возможности</p>
+            <ul class="theses theses-strong">
+              <li><strong>Синтез 7 слоёв реальности:</strong> ИИ сводит разрозненные данные в единый дашборд. На одном экране пересекаются обращения граждан, статус аварийности ЖКХ, бюджетные лимиты, кадастровая информация и индекс социального напряжения по конкретным территориям.</li>
+              <li><strong>Предиктивное моделирование решений (симуляция):</strong> возможность «просчитать» последствия до принятия приказа. Как отреагируют жители микрорайона на смену управляющей компании? Какие скрытые риски по 152-ФЗ несёт новое кадровое назначение? ИИ подсветит неочевидные связи и потенциальные конфликты.</li>
+              <li><strong>Генератор докладов для Губернатора:</strong> автоматическая сборка безупречной, железобетонной фактуры для отчётов «наверх». Система готовит аргументацию, подкреплённую цифрами, графиками и историей вопроса, страхуя от неточностей.</li>
+            </ul>
+            <p class="block-card__section-label">Оцифрованный результат</p>
+            <ul class="theses theses-strong">
+              <li><strong>Сведение управленческих ошибок к минимуму</strong> за счёт предварительной ИИ-оценки рисков.</li>
+              <li><strong>100% готовность</strong> к любым ВКС с Правительством области — все цифры и аргументы всегда под рукой в актуальном состоянии.</li>
+              <li><strong>Снижение затрат</strong> на содержание раздутого штата аналитиков при повышении качества и скорости обработки данных.</li>
+            </ul>
+          </article>
+
+          <article class="mirofish-showcase block-card--full reveal">
+            <div class="mirofish-showcase__inner">
+              <span class="tag tag--gold tag--module" style="display: inline-block; margin-bottom: 0.65rem;">Модуль V · Объединяющий слой</span>
+              <div class="block-card__head">
+                <span class="block-card__icon" aria-hidden="true">🌊</span>
+                <span class="badge badge--gold">Q3 2026</span>
+              </div>
+              <h3 class="mirofish-hero-title mirofish-hero-title--lead">MiroFish: первая в мире муниципальная мета-система «Живого города»</h3>
+              <p class="mirofish-lede">Передовое нововведение 2026 года · масштабное описание блока</p>
+              <p class="mirofish-kicker">
+                Внедрение <strong>MiroFish</strong> (<span class="inline-module inline-module--gold">Модуль&nbsp;V</span>&nbsp;— объединяющий слой) в архитектуру <strong>«Дмитровского стандарта»</strong> — это не очередное обновление IT-системы. Это <strong>мировая премьера новой эры вычислительной социологии</strong>, которая ставит Дмитров в один ряд с лидерами Smart City — Сингапур, Берлин — с качественным усилением в части <strong>социального интеллекта</strong> территории.
+              </p>
+
+              <p class="mirofish-body">
+                Классические Smart City (Нью-Йорк, Токио) в основном опираются на датчики ЖКХ и камеры. MiroFish создаёт <strong>«Параллельный Дмитров»</strong> — динамическую цифровую симуляцию <strong>50&nbsp;000 ИИ-агентов</strong>, у каждого из которых своя биография, ценности и «характер», отражающие реального жителя округа.
+              </p>
+
+              <div class="mirofish-pillars">
+                <div class="mirofish-pillar">
+                  <div class="mirofish-pillar__eyebrow">Функция 1</div>
+                  <h4>Лаборатория решений: SimCity для органов власти</h4>
+                  <p class="mirofish-body" style="margin: 0 0 0.6rem; font-size: 0.88rem;">
+                    Кабинет заместителя Главы превращается в научную лабораторию: решение — от перекрытия дороги до смены тарифов — <strong>прогоняется в виртуальной среде до официального оглашения</strong>.
+                  </p>
+                  <ul>
+                    <li><strong>10 минут вместо 3 месяцев:</strong> симуляция проигрывает тысячи веток событий за минуты, экономя месяцы публичных конфликтов и бюджеты на исправление ошибок.</li>
+                    <li><strong>Генеративная демократия:</strong> моделируются не просто «лайк/дизлайк», а глубокие дискуссии между «цифровыми жителями» — выявляются скрытые триггеры недовольства.</li>
+                  </ul>
+                </div>
+                <div class="mirofish-pillar">
+                  <div class="mirofish-pillar__eyebrow">Функция 2</div>
+                  <h4>Радар взрывов: предиктивная безопасность 2.0</h4>
+                  <p class="mirofish-body" style="margin: 0 0 0.6rem; font-size: 0.88rem;">
+                    Прогноз социального климата по <strong>четырём критическим факторам</strong> — инструмент раннего предупреждения для всей исполнительной вертикали.
+                  </p>
+                  <ul>
+                    <li><strong>Мусорный кризис — за 3 недели:</strong> анализ слабых сигналов и симуляция показывают назревающий коллапс до того, как первая куча мусора станет поводом для массовой жалобы.</li>
+                    <li><strong>Митинг — за 12 дней:</strong> система фиксирует рост радикализации в «Параллельном Дмитрове» — почти две недели форы для точечной работы с лидерами мнений и коррекции повестки.</li>
+                  </ul>
+                </div>
+                <div class="mirofish-pillar">
+                  <div class="mirofish-pillar__eyebrow">Функция 3</div>
+                  <h4>Синергия данных: «мозг» Дмитровского округа</h4>
+                  <p class="mirofish-body" style="margin: 0 0 0.6rem; font-size: 0.88rem;">
+                    <span class="inline-module inline-module--gold">Модуль&nbsp;V</span>&nbsp;— <strong>объединяющий слой</strong>: разрозненные элементы складываются в единый живой организм.
+                  </p>
+                  <ul>
+                    <li><strong>Агент-Разведчик</strong> — мгновенные сигналы «с земли» (100+ источников).</li>
+                    <li><strong>KPI и дашборды</strong> — текущая эффективность ведомств.</li>
+                    <li><strong>Медиа-Щит</strong> — контекст повестки и рисков коммуникации.</li>
+                    <li><strong>Советник Главы</strong> — синтез опыта и нормативной базы.</li>
+                    <li><strong>MiroFish</strong> — связывает всё в прогнозируемую картину будущего.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="mirofish-verdict">
+                <div class="mirofish-verdict__label">Вердикт</div>
+                <p>
+                  MiroFish делает Дмитров не просто «пользователем IT», а <strong>автором прецедента</strong>. Это <strong>первый в России</strong> (и один из первых в мире) кейс, когда муниципальное управление опирается не только на отчёты о прошлом, но и на <strong>математически выверенное моделирование будущего</strong>.
+                </p>
+              </div>
+
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 RADAR -->
+    <section id="radar" class="section section--deep">
+      <div class="container">
+        <div class="radar-layout">
+          <div class="reveal">
+            <span class="tag tag--accent">Эксклюзивный доступ · Только Глава округа</span>
+            <h2 class="section-title">Радар округа</h2>
+            <p class="section-sub" style="max-width: none;">
+              Все 7 ТУ на одном экране. Цвет — уровень угрозы. Расстояние от центра — степень напряжённости.
+            </p>
+            <ul class="tu-list">
+              <li class="tu-item">
+                <span><span class="tu-dot tu-dot--red" aria-hidden="true"></span> Яхрома</span>
+                <span style="color: var(--danger); font-weight: 500;">8.4%</span>
+                <div class="tu-bar-wrap"><div class="tu-bar" style="width: 84%; background: var(--danger);"></div></div>
+              </li>
+              <li class="tu-item">
+                <span><span class="tu-dot tu-dot--yellow" aria-hidden="true"></span> ТУ-2</span>
+                <span style="color: var(--warning); font-weight: 500;">5.1%</span>
+                <div class="tu-bar-wrap"><div class="tu-bar" style="width: 51%; background: var(--warning);"></div></div>
+              </li>
+              <li class="tu-item">
+                <span><span class="tu-dot tu-dot--green" aria-hidden="true"></span> Икша</span>
+                <span style="color: var(--success); font-weight: 500;">2.8%</span>
+                <div class="tu-bar-wrap"><div class="tu-bar" style="width: 28%; background: var(--success);"></div></div>
+              </li>
+              <li class="tu-item">
+                <span><span class="tu-dot tu-dot--green" aria-hidden="true"></span> Деденево</span>
+                <span style="color: var(--success); font-weight: 500;">3.2%</span>
+                <div class="tu-bar-wrap"><div class="tu-bar" style="width: 32%; background: var(--success);"></div></div>
+              </li>
+              <li class="tu-item">
+                <span><span class="tu-dot tu-dot--green" aria-hidden="true"></span> ТУ-4</span>
+                <span style="color: var(--success); font-weight: 500;">3.6%</span>
+                <div class="tu-bar-wrap"><div class="tu-bar" style="width: 36%; background: var(--success);"></div></div>
+              </li>
+              <li class="tu-item">
+                <span><span class="tu-dot tu-dot--green" aria-hidden="true"></span> ТУ-6</span>
+                <span style="color: var(--success); font-weight: 500;">2.9%</span>
+                <div class="tu-bar-wrap"><div class="tu-bar" style="width: 29%; background: var(--success);"></div></div>
+              </li>
+              <li class="tu-item">
+                <span><span class="tu-dot tu-dot--green" aria-hidden="true"></span> ТУ-7</span>
+                <span style="color: var(--success); font-weight: 500;">3.1%</span>
+                <div class="tu-bar-wrap"><div class="tu-bar" style="width: 31%; background: var(--success);"></div></div>
+              </li>
+            </ul>
+            <div class="compare-box">
+              <p>Сравнение с другими МО округа:</p>
+              <div class="compare-chips">
+                <span class="chip chip--warn">Дмитров 6.2%</span>
+                <span class="chip">Одинцово 4.1%</span>
+                <span class="chip">Мытищи 3.8%</span>
+                <span class="chip">Красногорск 4.4%</span>
+              </div>
+            </div>
+            <p style="margin-top: 1rem;"><span class="badge badge--accent">Эксклюзивный доступ · только Глава округа</span></p>
+          </div>
+          <div class="radar-svg-wrap reveal">
+            <svg class="radar-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle class="radar-ring" cx="200" cy="200" r="160" />
+              <circle class="radar-ring" cx="200" cy="200" r="120" />
+              <circle class="radar-ring" cx="200" cy="200" r="80" />
+              <circle class="radar-ring" cx="200" cy="200" r="40" />
+              <line class="radar-axis" x1="200" y1="40" x2="200" y2="360" />
+              <line class="radar-axis" x1="40" y1="200" x2="360" y2="200" />
+              <line class="radar-axis" x1="87" y1="87" x2="313" y2="313" />
+              <line class="radar-axis" x1="313" y1="87" x2="87" y2="313" />
+              <g class="radar-sweep">
+                <line x1="200" y1="200" x2="200" y2="50" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round" opacity="0.85" />
+              </g>
+              <!-- Яхрома - outer, red -->
+              <circle class="radar-dot pulse-dot" cx="200" cy="40" r="7" fill="#ef4444" />
+              <text class="radar-label" x="208" y="38">Яхрома</text>
+              <!-- ТУ-2 - middle, yellow -->
+              <circle class="radar-dot pulse-dot" cx="320" cy="200" r="6" fill="#f59e0b" />
+              <text class="radar-label" x="268" y="204">ТУ-2</text>
+              <!-- Green dots inner rings -->
+              <circle class="radar-dot pulse-dot" cx="248" cy="128" r="5" fill="#22c55e" />
+              <text class="radar-label" x="254" y="124">Икша</text>
+              <circle class="radar-dot pulse-dot" cx="152" cy="128" r="5" fill="#22c55e" />
+              <text class="radar-label" x="100" y="124">Деденево</text>
+              <circle class="radar-dot pulse-dot" cx="128" cy="248" r="5" fill="#22c55e" />
+              <text class="radar-label" x="70" y="252">ТУ-4</text>
+              <circle class="radar-dot pulse-dot" cx="272" cy="272" r="5" fill="#22c55e" />
+              <text class="radar-label" x="278" y="288">ТУ-7</text>
+              <circle class="radar-dot pulse-dot" cx="200" cy="240" r="5" fill="#22c55e" />
+              <text class="radar-label" x="208" y="244">ТУ-6</text>
+              <circle class="radar-center" cx="200" cy="200" r="22" />
+              <text x="200" y="205" text-anchor="middle" fill="#fff" font-family="Inter, sans-serif" font-size="12" font-weight="600">ГО</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- О проекте: доверие, принципы, финмодель (после радара) -->
+    <section id="philosophy" class="section section--lift philosophy-section">
+      <div class="container">
+        <div class="reveal phil-hero">
+          <span class="tag tag--gold" style="margin-bottom: 0.85rem;">Партнёрство, а не «готовый ящик»</span>
+          <h2 class="section-title">Не инструмент. Смена модели.</h2>
+        </div>
+
+        <div class="reveal phil-cards">
+          <div class="principles">
+            <div class="card">
+              <h3>Данные вместо ощущений</h3>
+              <p>Каждое решение опирается на реальные цифры: индекс напряжённости, рейтинг УК, индекс медийности — <strong style="font-weight: 500; color: rgba(255,255,255,0.92);">принять решение можно показать, а не объяснять «по ощущениям»</strong>.</p>
+            </div>
+            <div class="card">
+              <h3>Предвидение вместо реакции</h3>
+              <p>Перехват сигналов за 5–14 дней до официальной жалобы — <strong style="font-weight: 500; color: rgba(255,255,255,0.92);">вмешаться дешевле до эскалации, чем после неё</strong>.</p>
+            </div>
+            <div class="card">
+              <h3>Разгрузка, а не замена</h3>
+              <p>AI забирает рутину, люди занимаются стратегией — <strong style="font-weight: 500; color: rgba(255,255,255,0.92);">команда усиливается, а не подменяется</strong>, что критично для доверия внутри администрации.</p>
+            </div>
+          </div>
+          <div class="coop">
+            <div class="card card--trust-boost">
+              <h3>Поблочная оплата · Право выхода</h3>
+              <p>Каждый блок — отдельный контракт, право выхода без штрафов. Оплачиваете только тот объём, который приняли; <strong style="font-weight: 500; color: rgba(255,255,255,0.92);">экономический и репутационный риск зафиксированы заранее</strong>, а не «в догонку».</p>
+            </div>
+            <div class="card card--trust-boost">
+              <h3>Синергия блоков</h3>
+              <p>MiroFish обучается на данных всех модулей — экосистема тем дальновиднее, чем шире поток фактов. <strong style="font-weight: 500; color: rgba(255,255,255,0.92);">Это не навязанный монолит, а наращивание качества по шагам</strong>, когда каждый следующий модуль оправдывает себя цифрами.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 METRICS -->
+    <section id="metrics" class="section section--lift">
+      <div class="container">
+        <div class="reveal">
+          <h2 class="section-title">Что изменится в цифрах</h2>
+        </div>
+        <div class="kpi-grid">
+          <div class="card kpi-card reveal">
+            <div class="kpi-val">89 дн.</div>
+            <div class="kpi-lab">Окупаемость первого блока</div>
+          </div>
+          <div class="card kpi-card reveal">
+            <div class="kpi-val">4.5 млн</div>
+            <div class="kpi-lab">Экономия в год ₽</div>
+          </div>
+          <div class="card kpi-card reveal">
+            <div class="kpi-val">−40%</div>
+            <div class="kpi-lab">Эскалаций на Добродел за 6 мес.</div>
+          </div>
+          <div class="card kpi-card reveal">
+            <div class="kpi-val">9 мин</div>
+            <div class="kpi-lab">От сигнала до действия</div>
+          </div>
+          <div class="card kpi-card reveal">
+            <div class="kpi-val">85%+</div>
+            <div class="kpi-lab">Выполнение SLA</div>
+          </div>
+          <div class="card kpi-card reveal">
+            <div class="kpi-val">&gt;200%</div>
+            <div class="kpi-lab">ROI за первый год</div>
+          </div>
+        </div>
+        <div class="reveal table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Метрика</th>
+                <th>Сейчас</th>
+                <th>3 месяца</th>
+                <th>6 месяцев</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Эскалации на Добродел</td>
+                <td class="cell-bad">100%</td>
+                <td class="cell-good">−30%</td>
+                <td class="cell-good">−40%</td>
+              </tr>
+              <tr>
+                <td>Время реакции</td>
+                <td class="cell-bad">3–7 дней</td>
+                <td class="cell-good">до 24 ч</td>
+                <td class="cell-good">до 12 ч</td>
+              </tr>
+              <tr>
+                <td>Выполнение SLA</td>
+                <td class="cell-bad">~55%</td>
+                <td class="cell-good">75%</td>
+                <td class="cell-good">85%+</td>
+              </tr>
+              <tr>
+                <td>Реакция на фейк</td>
+                <td class="cell-bad">2–3 дня</td>
+                <td class="cell-good">до 1 ч</td>
+                <td class="cell-good">30 мин</td>
+              </tr>
+              <tr>
+                <td>Публикации в СМИ</td>
+                <td class="cell-bad">1–2/нед.</td>
+                <td class="cell-good">5–7/нед.</td>
+                <td class="cell-good">ежедневно</td>
+              </tr>
+              <tr>
+                <td>Индекс напряжённости</td>
+                <td class="cell-bad">10% красная зона</td>
+                <td class="cell-good">6–7%</td>
+                <td class="cell-good">≤4% зелёная</td>
+              </tr>
+              <tr>
+                <td>Риск штрафов 420-ФЗ</td>
+                <td class="cell-bad">до 4.5 млн/год</td>
+                <td class="cell-good">−50%</td>
+                <td class="cell-good">ликвидирован</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 STAKEHOLDERS -->
+    <section id="stakeholders" class="section section--deep">
+      <div class="container">
+        <div class="reveal stakeholders-wow">
+          <h2 class="stakeholders-wow__title">
+            <span class="stakeholders-wow__title-inner">
+              <span class="brand-lens brand-lens--stake-lens">Кого затронет</span><span class="brand-lens brand-lens--stake-tail"> проект</span>
+            </span>
+          </h2>
+          <p class="stakeholders-wow__sub">
+            <span class="stakeholders-wow__lead"><span class="stakeholders-wow__num">8</span> групп участников.</span>
+            <span class="stakeholders-wow__accent">Для каждого — конкретное изменение в работе.</span>
+          </p>
+        </div>
+        <div class="stake-grid">
+          <div class="card stake-card reveal">
+            <div class="stake-icon" aria-hidden="true">🏛</div>
+            <p class="role">Глава округа</p>
+            <p class="gets">Блоки 1–5</p>
+            <p>Утренний брифинг, тепловая карта, симулятор решений — из реакции в стратегическое управление</p>
+          </div>
+          <div class="card stake-card reveal">
+            <div class="stake-icon" aria-hidden="true">👔</div>
+            <p class="role">Замглавы</p>
+            <p class="gets">Блоки 1, 2</p>
+            <p>Дашборды по направлениям — контролирует по цифрам, не ощущениям</p>
+          </div>
+          <div class="card stake-card reveal">
+            <div class="stake-icon" aria-hidden="true">🔧</div>
+            <p class="role">Начальники ведомств</p>
+            <p class="gets">Блок 2</p>
+            <p>Инциденты до эскалации — решают тихо, без скандала</p>
+          </div>
+          <div class="card stake-card reveal">
+            <div class="stake-icon" aria-hidden="true">📊</div>
+            <p class="role">Аналитики МЦУР</p>
+            <p class="gets">Блоки 1, 2, 5</p>
+            <p>Автоотчёты, граф знаний — от копипаста к прогнозированию</p>
+          </div>
+          <div class="card stake-card reveal">
+            <div class="stake-icon" aria-hidden="true">📡</div>
+            <p class="role">Операторы ЕДДС</p>
+            <p class="gets">Блок 1</p>
+            <p>Готовые карточки — экономия 3–4 часа в день</p>
+          </div>
+          <div class="card stake-card reveal">
+            <div class="stake-icon" aria-hidden="true">📰</div>
+            <p class="role">Пресс-служба</p>
+            <p class="gets">Блок 3</p>
+            <p>Черновики постов, опровержения — из оправданий к повестке</p>
+          </div>
+          <div class="card stake-card reveal">
+            <div class="stake-icon" aria-hidden="true">🏗</div>
+            <p class="role">Управляющие компании</p>
+            <p class="gets">Блок 2</p>
+            <p>Цифровой индекс доверия — мотивация работать</p>
+          </div>
+          <div class="card stake-card reveal">
+            <div class="stake-icon" aria-hidden="true">👥</div>
+            <p class="role">Жители округа</p>
+            <p class="gets">Все блоки</p>
+            <p>Быстрое решение проблем — рост доверия к власти</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 TIMELINE -->
+    <section id="timeline" class="section section--lift">
+      <div class="container">
+        <div class="reveal">
+          <h2 class="section-title">6 месяцев до федерального кейса</h2>
+        </div>
+        <div class="timeline reveal">
+          <div class="timeline-item timeline-item--active">
+            <h4>Нед. 1–2 · Старт</h4>
+            <p>Метрика региона, аналитический аудит, граф знаний, развёртывание</p>
+            <p class="res">Результат: карта белых пятен</p>
+          </div>
+          <div class="timeline-item">
+            <h4>Месяц 1 · Блок 1</h4>
+            <p>Агент-Разведчик, пилот Икша</p>
+            <p class="res">Результат: первый предотвращённый инцидент</p>
+          </div>
+          <div class="timeline-item">
+            <h4>Месяц 2 · Блоки 2+3</h4>
+            <p>KPI агенты + Медиа-Щит</p>
+            <p class="res">Результат: цифровая оценка УК, управление медиаполем</p>
+          </div>
+          <div class="timeline-item">
+            <h4>Месяц 3 · Блок 4</h4>
+            <p>Советник Главы, граф знаний</p>
+            <p class="res">Результат: дашборд для Губернатора, зелёная зона ЦУР</p>
+          </div>
+          <div class="timeline-item">
+            <h4>Мес. 4–5 · Блок 5</h4>
+            <p>MiroFish, 5000 агентов</p>
+            <p class="res">Результат: каждое решение тестируется до принятия</p>
+          </div>
+          <div class="timeline-item">
+            <h4>Месяц 6 · Экосистема</h4>
+            <p>Полный боевой режим</p>
+            <p class="res">Результат: Дмитровский стандарт, первый кейс Подмосковья</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 INVESTMENTS -->
+    <section id="investments" class="section section--deep">
+      <div class="container">
+        <div class="reveal investments-headline">
+          <h2 class="investments-headline__title">
+            <span class="investments-headline__inner">
+              <span class="brand-lens brand-lens--invest-lens">Полная</span><span class="brand-lens brand-lens--invest-tail"> экосистема</span>
+            </span>
+          </h2>
+          <p class="investments-headline__sum">6&nbsp;000&nbsp;000&nbsp;₽</p>
+        </div>
+        <div class="reveal">
+          <div class="budget-bar" aria-hidden="true">
+            <div class="budget-seg seg-a"></div>
+            <div class="budget-seg seg-b"></div>
+            <div class="budget-seg seg-c"></div>
+            <div class="budget-seg seg-d"></div>
+            <div class="budget-seg seg-e"></div>
+            <div class="budget-seg seg-f"></div>
+          </div>
+          <div class="legend">
+            <span><i style="background:#3b82f6;"></i> Аналитика 300К</span>
+            <span><i style="background:var(--success);"></i> Разведчик 1.1М</span>
+            <span><i style="background:var(--warning);"></i> KPI 900К</span>
+            <span><i style="background:#06b6d4;"></i> Медиа 700К</span>
+            <span><i style="background:#a855f7;"></i> Советник 1.2М</span>
+            <span><i style="background:#ec4899;"></i> MiroFish 1.8М</span>
+          </div>
+        </div>
+        <ul class="expense-list reveal">
+          <li>
+            <span>Аналитика и метрика региона</span>
+            <span class="badge badge--success">Завершено</span>
+            <span class="amt">300 000 ₽</span>
+          </li>
+          <li>
+            <span class="expense-list__label">
+              <span class="expense-list__module">Модуль I</span>
+              <span class="expense-list__name">Агент-Разведчик</span>
+            </span>
+            <span class="badge badge--warning">Бета запущена</span>
+            <span class="amt">1 100 000 ₽</span>
+          </li>
+          <li>
+            <span class="expense-list__label">
+              <span class="expense-list__module">Модуль II</span>
+              <span class="expense-list__name">KPI команды</span>
+            </span>
+            <span class="badge badge--muted">Следующий</span>
+            <span class="amt">900 000 ₽</span>
+          </li>
+          <li>
+            <span class="expense-list__label">
+              <span class="expense-list__module">Модуль III</span>
+              <span class="expense-list__name">Медиа-Щит</span>
+            </span>
+            <span class="badge badge--muted">Планируется</span>
+            <span class="amt">700 000 ₽</span>
+          </li>
+          <li>
+            <span class="expense-list__label">
+              <span class="expense-list__module">Модуль IV</span>
+              <span class="expense-list__name">Советник Главы</span>
+            </span>
+            <span class="badge badge--muted">Планируется</span>
+            <span class="amt">1 200 000 ₽</span>
+          </li>
+          <li>
+            <span class="expense-list__label">
+              <span class="expense-list__module expense-list__module--gold">Модуль V</span>
+              <span class="expense-list__name">MiroFish</span>
+            </span>
+            <span class="badge badge--gold">Q3 2026</span>
+            <span class="amt">1 800 000 ₽</span>
+          </li>
+        </ul>
+        <div class="triple-cards reveal">
+          <div class="card">
+            <p class="num">6.0 млн</p>
+            <p style="color: var(--text-muted); margin: 0; font-size: 0.9rem;">инвестиции в экосистему</p>
+          </div>
+          <div class="card">
+            <p class="num">≥12 млн</p>
+            <p style="color: var(--text-muted); margin: 0; font-size: 0.9rem;">экономия в год ₽</p>
+          </div>
+          <div class="card">
+            <p class="num">&gt;200%</p>
+            <p style="color: var(--text-muted); margin: 0; font-size: 0.9rem;">ROI за первый год</p>
+          </div>
+        </div>
+        <div class="effect-grid reveal">
+          <div class="card">
+            <h3 style="margin-top:0;">Прямая экономия</h3>
+            <p>Штрафы 420-ФЗ до 4.5 млн, аварийные ремонты, ФОТ</p>
+          </div>
+          <div class="card">
+            <h3 style="margin-top:0;">Политический капитал</h3>
+            <p>KPI Глав регионов (февраль 2026), кейс для Губернатора через 90 дней</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="analogs" class="section section--lift">
+      <div class="container">
+        <div class="reveal">
+          <h2 class="section-title">Аналоги: мировые лидеры</h2>
+          <p class="section-sub" style="max-width: none; margin-bottom: 1.5rem;">
+            Крупнейшие умные города уже вкладываются в цифровые двойники и предиктивные системы управления.
+          </p>
+        </div>
+        <div class="analogs-grid">
+          <article class="card analog-card reveal">
+            <div class="analog-card__city">Сингапур</div>
+            <p><strong style="font-weight: 500; color: var(--text);">$73M</strong> — инвестиции в масштабную программу цифровых двойников и симуляций для города.</p>
+          </article>
+          <article class="card analog-card reveal">
+            <div class="analog-card__city">Шанхай</div>
+            <p><strong style="font-weight: 500; color: var(--text);">City Brain</strong> — единая AI-платформа для около <strong style="font-weight: 500; color: var(--text);">20 млн</strong> жителей: транспорт, безопасность, городские сервисы.</p>
+          </article>
+          <article class="card analog-card reveal">
+            <div class="analog-card__city">Phoenix, США</div>
+            <p>Инструменты на базе AI <strong style="font-weight: 500; color: var(--text);">прогнозируют до 80% инцидентов</strong> в работе городских и экологических служб.</p>
+          </article>
+          <article class="card analog-card reveal">
+            <div class="analog-card__city">Россия · контекст</div>
+            <p>На уровне муниципалитетов полноценных аналогов такой замкнутой AI-экосистемы пока <strong style="font-weight: 500; color: var(--text);">нет</strong> — окно возможностей открыто.</p>
+          </article>
+        </div>
+        <div class="analogs-callout reveal">
+          <p>
+            <strong>Россия — 0 муниципалитетов с такой системой.</strong>
+            Дмитров может стать первым: собственный пилот командного центра, пять модулей и цифровой двойник территории — в одной линейке «Линза региона».
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 CTA -->
+    <section id="cta" class="section section--deep cta-section">
+      <div class="container">
+        <div class="reveal">
+          <h2 class="cta-section__title">Следующий шаг — подписание контракта</h2>
+        </div>
+      </div>
+    </section>
+  </main>
+  </div>
+
+  <script>
+    (function () {
+      var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var vid = document.getElementById("bg-video");
+      if (vid && reduced) {
+        vid.removeAttribute("autoplay");
+        vid.pause();
+      } else if (vid && !reduced) {
+        vid.play().catch(function () {});
+      }
+
+      document.querySelectorAll(".mockup-video-wrap video").forEach(function (mv) {
+        if (reduced) {
+          mv.removeAttribute("autoplay");
+          mv.pause();
+        } else {
+          mv.play().catch(function () {});
+        }
+      });
+
+      var heroEl = document.getElementById("hero");
+      var tiltEl = document.getElementById("hero-title-tilt");
+      if (heroEl && tiltEl && !reduced) {
+        heroEl.addEventListener("mousemove", function (e) {
+          var r = heroEl.getBoundingClientRect();
+          var px = (e.clientX - r.left) / r.width - 0.5;
+          var py = (e.clientY - r.top) / r.height - 0.5;
+          var rx = 4 + py * -11;
+          var ry = -2 + px * 15;
+          tiltEl.classList.remove("hero-title-3d__inner--idle");
+          tiltEl.style.transform =
+            "rotateX(" + rx + "deg) rotateY(" + ry + "deg) translateZ(10px)";
+        });
+        heroEl.addEventListener("mouseleave", function () {
+          tiltEl.style.transform = "";
+          tiltEl.classList.add("hero-title-3d__inner--idle");
+        });
+      }
+
+      if (reduced) {
+        document.querySelectorAll(".reveal").forEach(function (el) {
+          el.classList.add("visible");
+        });
+      } else {
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+              }
+            });
+          },
+          { root: null, rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+        );
+        document.querySelectorAll(".reveal").forEach(function (el) {
+          observer.observe(el);
+        });
+        function revealIfVisible() {
+          document.querySelectorAll(".reveal:not(.visible)").forEach(function (el) {
+            var r = el.getBoundingClientRect();
+            var vh = window.innerHeight || document.documentElement.clientHeight;
+            if (r.top < vh && r.bottom > 0) {
+              el.classList.add("visible");
+            }
+          });
+        }
+        revealIfVisible();
+        window.addEventListener("load", revealIfVisible);
+      }
+    })();
+  </script>
+</body>
+</html>
