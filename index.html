@@ -733,13 +733,86 @@
       box-shadow:
         0 20px 50px rgba(0, 0, 0, 0.35),
         inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .scout-dashboard-frame {
+      flex: 1 1 auto;
+      min-height: 0;
+      position: relative;
     }
 
     .scout-dashboard-iframe {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       border: 0;
       display: block;
+    }
+
+    .scout-access-footer {
+      flex: 0 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem 0.85rem;
+      padding: 0.65rem 1rem;
+      background: rgba(6, 8, 15, 0.94);
+      border-top: 0.5px solid rgba(99, 102, 241, 0.28);
+      font-size: 0.8125rem;
+    }
+
+    .scout-access-footer__label {
+      color: rgba(255, 255, 255, 0.52);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      font-weight: 500;
+    }
+
+    .scout-access-footer__code {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.95);
+      background: rgba(99, 102, 241, 0.12);
+      padding: 0.35rem 0.65rem;
+      border-radius: 8px;
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      letter-spacing: 0.04em;
+    }
+
+    .scout-access-footer__copy {
+      margin-left: auto;
+      padding: 0.4rem 0.85rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.06);
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .scout-access-footer__copy:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(99, 102, 241, 0.45);
+    }
+
+    .scout-access-footer__copy.is-done {
+      border-color: rgba(34, 197, 94, 0.5);
+      color: #86efac;
+    }
+
+    @media (max-width: 480px) {
+      .scout-access-footer__copy {
+        margin-left: 0;
+        width: 100%;
+      }
     }
 
     .principles {
@@ -2037,14 +2110,23 @@
             Действующий пилот <strong style="font-weight: 500; color: rgba(255, 255, 255, 0.92);">Командного центра</strong> — во встроенной рамке ниже.
           </p>
           <div class="scout-dashboard-wrap">
-            <iframe
-              class="scout-dashboard-iframe"
-              src="https://agent-scout-hq.pages.dev"
-              title="Командный центр — пилот Агент-Разведчик"
-              allow="fullscreen; clipboard-write"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
+            <div class="scout-dashboard-frame">
+              <iframe
+                class="scout-dashboard-iframe"
+                src="https://agent-scout-hq.pages.dev"
+                title="Командный центр — пилот Агент-Разведчик"
+                allow="fullscreen; clipboard-write"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+            <div class="scout-access-footer" role="group" aria-label="Ключ доступа к пилоту">
+              <span class="scout-access-footer__label">Код доступа</span>
+              <code class="scout-access-footer__code" id="scout-access-code">SITCEN-2026</code>
+              <button type="button" class="scout-access-footer__copy" id="scout-access-copy-btn">
+                Скопировать
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -2763,6 +2845,38 @@
         }
         revealIfVisible();
         window.addEventListener("load", revealIfVisible);
+      }
+
+      var scoutCopyBtn = document.getElementById("scout-access-copy-btn");
+      var scoutCodeEl = document.getElementById("scout-access-code");
+      if (scoutCopyBtn && scoutCodeEl) {
+        var scoutKey = scoutCodeEl.textContent || "";
+        scoutCopyBtn.addEventListener("click", function () {
+          function done() {
+            scoutCopyBtn.classList.add("is-done");
+            var prev = scoutCopyBtn.textContent;
+            scoutCopyBtn.textContent = "Скопировано";
+            setTimeout(function () {
+              scoutCopyBtn.textContent = prev;
+              scoutCopyBtn.classList.remove("is-done");
+            }, 2000);
+          }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(scoutKey.trim()).then(done).catch(function () {});
+          } else {
+            var ta = document.createElement("textarea");
+            ta.value = scoutKey.trim();
+            ta.setAttribute("readonly", "");
+            ta.style.position = "fixed";
+            ta.style.left = "-9999px";
+            document.body.appendChild(ta);
+            ta.select();
+            try {
+              if (document.execCommand("copy")) done();
+            } catch (err) {}
+            document.body.removeChild(ta);
+          }
+        });
       }
     })();
   </script>
